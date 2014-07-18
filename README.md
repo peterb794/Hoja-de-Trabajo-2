@@ -120,3 +120,66 @@ Stack Vector:
 	}
 
 	}
+
+Driver:
+
+	public static void main(String[] args) {
+		String name = "postfix.txt";
+		Calculadora calc = new Calculadora(name);
+	}
+
+	}
+	
+	
+Calculadora:
+
+	public class Calculadora {
+	private File txt;
+	private char[] instruccion;
+	
+	public Calculadora(String nombre){
+		instruccion = new char[13];
+		//Creacion del archivo para lectura.
+		try{
+			txt = new File(nombre);
+		}
+		//Excepcion que se lanza cuando el archivo no existe.
+		catch(NullPointerException e){
+			JOptionPane.showMessageDialog(null, "No existe el archivo.", "ERROR", 
+					JOptionPane.ERROR_MESSAGE);
+			System.exit(0);
+		}
+	    try{
+	    	//Creacion de scanner especializado para el archivo.
+	    	Scanner s = new Scanner(txt);
+			//Lee todo el archivo; almacena en la matriz. 
+	        while (s.hasNextLine()) {
+	            instruccion = s.nextLine().toCharArray();
+	        }
+	        //Se cierra el Scanner para evitar "leaks".
+	        s.close();
+	    } 
+	    //Excepcion que se lanza cuando hay un error en lectura.
+	    catch (FileNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "Archivo no encontrado.", "ERROR", 
+					JOptionPane.ERROR_MESSAGE);
+			System.exit(0);
+	    }
+	}
+	
+	public File getTxt() {
+		return txt;
+	}
+
+	public void setTxt(File txt) {
+		this.txt = txt;
+	}
+
+	public char[] getInstruccion() {
+		return instruccion;
+	}
+
+	public void setInstruccion(char[] instruccion) {
+		this.instruccion = instruccion;
+	}
+	}
