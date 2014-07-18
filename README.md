@@ -132,13 +132,16 @@ Driver:
 	
 	
 Calculadora:
-
-	public class Calculadora {
+	public class Calculadora{
 	private File txt;
 	private char[] instruccion;
+	private StackVector<Integer> pila;
+	int resultado = 0;
 	
 	public Calculadora(String nombre){
 		instruccion = new char[13];
+		pila = new StackVector<Integer>();
+		pila.push(resultado);
 		//Creacion del archivo para lectura.
 		try{
 			txt = new File(nombre);
@@ -167,6 +170,68 @@ Calculadora:
 	    }
 	}
 	
+	public void operar(){
+		
+		for(int i = 0; i < instruccion.length; i++){
+			switch(instruccion[i]){
+				case('+'):
+					suma();
+					break;
+				case('*'):
+					multiplicacion();
+					break;
+				case('/'):
+					division();
+					break;
+				case('-'):
+					resta();
+					break;
+				case(' '):
+					break;
+				default:
+					pila.push(Character.getNumericValue(instruccion[i]));
+					break;
+			}
+		}
+	}
+	
+	public void suma(){
+		resultado = pila.pop() + pila.pop();
+		pila.push(resultado);
+	}
+	
+	public void multiplicacion(){
+		resultado = pila.pop() * pila.pop();
+		pila.push(resultado);
+	}
+	
+	public void division(){
+		resultado = (1/pila.pop()) * pila.pop();
+		pila.push(resultado);
+	}
+	
+	public void resta(){
+		resultado = -(pila.pop()) + pila.pop();
+		pila.push(resultado);
+	}
+	
+	
+	public StackVector<Integer> getPila() {
+		return pila;
+	}
+
+	public void setPila(StackVector<Integer> pila) {
+		this.pila = pila;
+	}
+
+	public int getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(int resultado) {
+		this.resultado = resultado;
+	}
+
 	public File getTxt() {
 		return txt;
 	}
@@ -182,4 +247,4 @@ Calculadora:
 	public void setInstruccion(char[] instruccion) {
 		this.instruccion = instruccion;
 	}
-	}
+}
