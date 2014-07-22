@@ -124,22 +124,36 @@ Stack Vector:
 Driver:
 
 	public static void main(String[] args) {
+		//Creacion de calculadora con archivo provisto.
 		String name = "postfix.txt";
 		Calculadora calc = new Calculadora(name);
+		//Llevar a cabo lectura y operacion de instrucciones.
+		calc.operar();
+		//Imprimir instrucciones para verificacion de lectura.
+		System.out.println("Instrucciones: ");
+		for(int i = 0; i < calc.getInstruccion().length; i++){
+			System.out.println(calc.getInstruccion()[i]);
+		}
+		//Despligue de resultado final.
+		System.out.println("\n\n -------Resultado: "+ calc.getResultado());
 	}
 
 	}
 	
 	
 Calculadora:
-	public class Calculadora{
-	private File txt;
-	private char[] instruccion;
-	private StackVector<Integer> pila;
-	int resultado = 0;
+
+public class Calculadora {
+	private File txt;					//Archivo con instrucciones aritmeticas.
+	private char[] instruccion;			//Array para almanacenar cada linea como una instruccion.
+	private StackVector<Integer> pila;	//Implementacion con funcionalidad de pila.
+	int resultado = 0;					//Utilizado para almacenar resultado de cada linea.
 	
+	//Metodo constructor. Recibe como parametro el nombre del archivo por leer. 
 	public Calculadora(String nombre){
+		//Valores iniciales para atributos.
 		instruccion = new char[13];
+		//Creacion de pila de enteros utilizando genericos.
 		pila = new StackVector<Integer>();
 		pila.push(resultado);
 		//Creacion del archivo para lectura.
@@ -170,8 +184,9 @@ Calculadora:
 	    }
 	}
 	
+	//Metodo para llevar a cabo instrucciones. Utiliza metodos de apoyo.
 	public void operar(){
-		
+		//Evalua la linea obtenida del archivo texto. 
 		for(int i = 0; i < instruccion.length; i++){
 			switch(instruccion[i]){
 				case('+'):
@@ -188,6 +203,7 @@ Calculadora:
 					break;
 				case(' '):
 					break;
+				//Para cada numero.
 				default:
 					pila.push(Character.getNumericValue(instruccion[i]));
 					break;
@@ -195,6 +211,7 @@ Calculadora:
 		}
 	}
 	
+	//Metodos de apoyo para operaciones.
 	public void suma(){
 		resultado = pila.pop() + pila.pop();
 		pila.push(resultado);
@@ -215,7 +232,7 @@ Calculadora:
 		pila.push(resultado);
 	}
 	
-	
+	//Metodos set y get para cada atributo.
 	public StackVector<Integer> getPila() {
 		return pila;
 	}
