@@ -265,3 +265,68 @@ public class Calculadora {
 		this.instruccion = instruccion;
 	}
 }
+
+StackVectorTest:
+	public class StackVectorTest {
+	
+		@Test
+		public final void testPush() {
+			System.out.println("Probando Push\n");
+			int item = 24;
+			StackVector<Integer> instance = new StackVector<Integer>();
+			instance.push(item);
+			int resultado = instance.pop();
+	        assertEquals(item, resultado);
+			//fail("Not yet implemented"); // TODO
+		}
+	
+		@Test
+		public final void testPop() {
+			System.out.println("Probando Pop\n");
+			int item = 24;
+			int item_2 = 12;
+			StackVector<Integer> instance = new StackVector<Integer>();
+			instance.push(item);
+			instance.push(item_2);
+			int resultado = instance.pop();
+			resultado = instance.pop();
+			assertEquals(item, resultado);
+			//fail("Not yet implemented"); // TODO
+		}
+	
+		@Test
+		public final void testPeek() {
+			System.out.println("Probando Peek\n");
+			int item = 24;
+			StackVector<Integer> instance = new StackVector<Integer>();
+			instance.push(item);
+			int resultado = instance.peek();
+	        assertEquals(item, resultado);
+			//fail("Not yet implemented"); // TODO
+		}
+	
+		@Test
+		public final void testEmpty() {
+			System.out.println("Probando Empty\n");
+			int item = 24;
+			StackVector<Integer> instance = new StackVector<Integer>();
+			instance.push(item);
+			boolean expected = false;
+			boolean resultado = instance.empty();
+			assertEquals(expected, resultado);
+			//fail("Not yet implemented"); // TODO
+		}
+	
+		@Test
+		public final void testSize() {
+			System.out.println("Probando Push\n");
+			int item = 24;
+			StackVector<Integer> instance = new StackVector<Integer>();
+			instance.push(item);
+			int expected = 1;
+			int resultado = instance.size();
+	        assertEquals(expected, resultado);
+			//fail("Not yet implemented"); // TODO
+		}
+	
+	}
